@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.Console;
 
 public class PracticaTienda {
     public static void main(String[] args) {
@@ -26,17 +27,34 @@ public class PracticaTienda {
             try {
                 edad = Integer.parseInt(edadUsuario);
                 if (edad >= 18) {
-                    System.out.println("El usuario es mayo de edad y puede pasar a la tienda");
-                    System.out.println("Digita la clave de tu cuenta de la tienda");
-                    var claveCtaTiendaIngresada = scanner.nextLine();
-                    if (claveCtaTiendaIngresada.equals(claveCtaTiendaUsuario)) {
-                        System.out.println("Bienvenido a tu cuenta de la tienda ");
-                        System.out.println("*** Escoge tu departamento***");
-                        System.out.println("Computadoras: 1");
-                        System.out.println("Televisiones: 2");
-                        System.out.println("Celulares: 3");
-                        var departamento = scanner.nextLine();
-                        switch (departamento) {
+                    System.out.println("El usuario es mayor de edad y puede pasar a la tienda");
+
+                    //Se obtiene la instance de Console
+                    Console console = System.console();
+                    if (console == null) {
+                        System.out.println("No se puede obtener la consola");
+                        return;
+                    }
+
+
+                    //A continuacion, ciclo para clave, mientras sea clave incorrecta, el usuario volvera a tener que ingresar la clave
+                    String claveCtaTiendaIngresada ="";
+                    while(!claveCtaTiendaIngresada.equals(claveCtaTiendaUsuario)) {
+                        System.out.println("Digita la clave de tu cuenta de la tienda");
+                        char[] passwordArray = console.readPassword();
+                        claveCtaTiendaIngresada = new String(passwordArray);
+                        if (!claveCtaTiendaIngresada.equals(claveCtaTiendaUsuario)) {
+                            System.out.println("contrasena incorrecta");
+                        }
+                    } //Finaliza ciclo para clave ingresada
+
+                    System.out.println("Bienvenido a tu cuenta de la tienda ");
+                    System.out.println("*** Escoge tu departamento***");
+                    System.out.println("Computadoras: 1");
+                    System.out.println("Televisiones: 2");
+                    System.out.println("Celulares: 3");
+                    var departamento = scanner.nextLine();
+                    switch (departamento) {
                             case "1":
                                 System.out.println("***Bienvenido al dpto Computadoras");
                                 break;
@@ -48,11 +66,6 @@ public class PracticaTienda {
                                 break;
                             default:
                                 System.out.println("Departamento invalido");
-                        }
-
-
-                    } else {
-                        System.out.println("contrasena incorrecta");
                     }
 
 
@@ -64,6 +77,6 @@ public class PracticaTienda {
                 System.out.println("El formato de edad no es valido");
 
             }
-        }
+        } //Cierre de ciclo de edad
     }
 }
