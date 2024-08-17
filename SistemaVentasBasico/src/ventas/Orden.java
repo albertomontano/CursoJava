@@ -48,6 +48,8 @@ public class Orden {
 
     }
 
+    //Se puede eliminar el metodo mostrarOrden, usando el metodo toString
+
 
 
 
